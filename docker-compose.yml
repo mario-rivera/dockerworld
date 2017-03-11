@@ -8,12 +8,17 @@ services:
             - "8080:80"
         links:
             - php
-            - maridb
+            - mariadb
+        environment:
+            - "MYSQL_HOST=mariadb"
+            - "MYSQL_USER=root"
+            - "MYSQL_PASSWORD=root"
+            - "MYSQL_DATABASE=world"
     php:
         build: ./docker/php/
         volumes:
             - ./:/var/www
-    maridb:
+    mariadb:
         image: mariadb:10.1
         environment:
             - "MYSQL_ROOT_PASSWORD=root"
